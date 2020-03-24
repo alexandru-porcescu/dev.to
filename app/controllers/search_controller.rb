@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[tags chat_channels]
   before_action :format_integer_params
   before_action :sanitize_params, only: %i[classified_listings]
 
@@ -65,7 +65,7 @@ class SearchController < ApplicationController
                   # No need to check for articles or podcast episodes if we know we only want users
                   user_search
                 else
-                  # if params[:class_name] == PodcastEpisode, Article, or comment then skip user lookup
+                  # if params[:class_name] == PodcastEpisode, Article, or Comment then skip user lookup
                   feed_content_search
                 end
 
